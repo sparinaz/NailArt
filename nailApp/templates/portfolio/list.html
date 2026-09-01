@@ -1,0 +1,92 @@
+{%extends 'base.html'%} 
+{%load static%} 
+{% block title %} Sanaz Nail Art {% endblock%} 
+{% block breadcrumb %} نمونه کارها {% endblock %} 
+{%block content%}
+
+<!--=============================================
+                PORTFOLIO SHOWCASE
+==============================================-->
+
+<section class="portfolio-section">
+  <div class="container">
+    <div class="portfolio-heading text-center">
+      <span class="section-subtitle"> {{sitesetting.site_name}} </span>
+
+      <h2>{{innerhero.title}}</h2>
+
+      <p>
+        {{innerhero.subtitle}}
+      </p>
+    </div>
+
+    <div class="portfolio-masonry">
+      <!-- ITEM -->
+{%for portfolio in portfolios%}
+      <a
+        href="{{portfolio.cover_image.url}}"
+        class="portfolio-card {{portfolio.card_type}}"
+      >
+        <img src="{{portfolio.cover_image.url}}" alt="{{portfolio.title}}" />
+
+        <div class="portfolio-overlay">
+          <div class="portfolio-icon">
+            <i class="fa fa-search-plus"></i>
+          </div>
+        </div>
+      </a>
+
+{%if forloop.counter == 4 %}
+      <!-- BRAND CARD -->
+
+      <div class="portfolio-brand-card">
+        <div class="brand-card-inner">
+          <img
+            src="{{sitesetting.logo.url}}"
+            alt="{{sitesetting.site_name}}"
+          />
+
+          <span class="brand-small"> {{sitesetting.site_name}} </span>
+
+          <h3>
+            Beauty<br />
+            Meets Art
+          </h3>
+
+          <p>
+            طراحی، کاشت و ژلیش حرفه‌ای با استفاده از بهترین متریال و جدیدترین
+            متدهای روز.
+          </p>
+
+          <a href="https://wa.me/{{sitesetting.whatsapp}}"> رزرو نوبت </a>
+        </div>
+      </div>
+{%endif%}
+{%endfor%}
+    </div>
+  </div>
+</section>
+
+<!--=============================================
+                    BOOK CTA
+==============================================-->
+
+<section class="portfolio-cta">
+  <div class="container">
+    <div class="portfolio-cta-box">
+      <span> {{sitesetting.site_name}} </span>
+
+      <h2>زیبایی ناخن‌های شما، امضای هنر ماست</h2>
+
+      <p>
+        اگر شما هم به دنبال طراحی‌های خاص، اجرای حرفه‌ای و استفاده از بهترین
+        متریال هستید، همین حالا نوبت خود را رزرو کنید.
+      </p>
+
+      <a href="https://wa.me/{{sitesetting.whatsapp}}" class="portfolio-book-btn">
+        رزرو نوبت
+      </a>
+    </div>
+  </div>
+</section>
+{%endblock%}

@@ -1,0 +1,86 @@
+{%extends 'base.html'%} 
+{%load static%} 
+{% block title %} Sanaz Nail Art {% endblock%} 
+{% block breadcrumb %} تماس با ما {% endblock %} 
+{%block content%}
+
+<section class="contact-section" id="contact">
+  <div class="container">
+    <div class="section-title text-center">
+      <span>Sanaz Nail Art</span>
+      <h2>تماس با ما</h2>
+      <p>همیشه آماده پاسخگویی و رزرو نوبت شما هستیم.</p>
+    </div>
+
+    <div class="row align-items-center">
+      <!-- اطلاعات -->
+      <div class="col-lg-5">
+        <div class="contact-card">
+          <div class="contact-item">
+            <i class="fa-solid fa-phone"></i>
+
+            <div>
+              <h4>شماره تماس</h4>
+              <p>{{sitesetting.mobile}}</p>
+            </div>
+          </div>
+
+          <div class="contact-item">
+            <i class="fa fa-map-marker"></i>
+
+            <div>
+              <h4>آدرس سالن</h4>
+              <p>{{sitesetting.address|linebreaksbr}}</p>
+            </div>
+          </div>
+
+          <div class="contact-item">
+            <i class="fa fa-clock-o"></i>
+
+            <div>
+              <h4>ساعات کاری</h4>
+              <p>
+                 {{ sitesetting.working_hours|linebreaksbr }}
+              </p>
+            </div>
+          </div>
+
+          <div class="quick-buttons">
+            <a href="https://wa.me/{{sitesetting.whatsapp}}">
+              <i class="fa-brands fa-whatsapp"></i>
+              رزرو در واتساپ
+            </a>
+
+            <a href="{{sitesetting.instagram}}">
+              <i class="fa-brands fa-instagram"></i>
+              اینستاگرام
+            </a>
+
+            <a href="tel:{{sitesetting.phone}}">
+              <i class="fa-solid fa-phone"></i>
+              تماس مستقیم
+            </a>
+
+            <a href="#">
+              <i class="fa fa-map"></i>
+              مسیریابی
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- نقشه -->
+      <div class="col-lg-7">
+        <div class="map-box">
+          <iframe
+            src="{{sitesetting.map_iframe}}"
+            loading="lazy"
+            allowfullscreen
+          >
+          </iframe>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+{%endblock%}

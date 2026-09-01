@@ -1,0 +1,63 @@
+    <!-- header -->
+    <header class="inner-header">
+      <div class="container">
+        <nav class="inner-navbar">
+          <a href="{% url 'index' %}" class="inner-logo">
+            <img
+              src="{{ sitesetting.logo.url }}"
+              alt="Sanaz Nail Art"
+            />
+          </a>
+
+          <ul class="inner-menu">
+            <li>
+              <a
+                href="{% url 'index' %}"
+                class="{% if request.resolver_match.url_name == 'index' %}active{% endif %}"
+                >خانه</a
+              >
+            </li>
+            <li>
+              <a
+                href="{% url 'service_list' %}"
+                class="{% if request.resolver_match.url_name == 'service_list' %}active{% endif %}"
+                >خدمات</a
+              >
+            </li>
+            <li>
+              <a
+                href="{% url 'portfolio_list' %}"
+                class="{% if request.resolver_match.url_name == 'portfolio_list' %}active{% endif %}"
+                >نمونه کارها</a
+              >
+            </li>
+            <li>
+              <a
+                href="{% url 'blog_list' %}"
+                class="{% if request.resolver_match.url_name == 'blog_list' %}active{% endif %}"
+                >بلاگ</a
+              >
+            </li>
+            <li>
+              <a
+                href="{% url 'about_us' %}"
+                class="{% if request.resolver_match.url_name == 'about_us' %}active{% endif %}"
+                >درباره ما</a
+              >
+            </li>
+            <li>
+              <a
+                href="{% url 'contact_us' %}"
+                class="{% if request.resolver_match.url_name == 'contact_us' %}active{% endif %}"
+                >تماس با ما</a
+              >
+            </li>
+          </ul>
+
+          <a href="https://wa.me/{{ sitesetting.whatsapp }}" class="header-btn">
+            رزرو نوبت
+          </a>
+        </nav>
+      </div>
+    </header>
+    <!-- end header -->

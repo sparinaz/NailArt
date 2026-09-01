@@ -1,0 +1,55 @@
+<!-- footer -->
+    <footer class="footer">
+      <div class="container">
+        <div class="footer-main">
+          <h2 class="footer-logo">
+            <a href="{% url 'index' %}">
+              <img
+                src="{{ sitesetting.logo.url }}"
+                alt="Sanaz Nail Art"
+              />
+            </a>
+          </h2>
+
+          <p class="footer-desc">
+            خدمات تخصصی کاشت، ترمیم، ژلیش و طراحی ناخن با جدیدترین متدهای روز و
+            رعایت کامل اصول بهداشتی
+          </p>
+
+          <div class="footer-social">
+            <a
+              href="{{sitesetting.instagram}}"
+              target="_blank"
+            >
+              <i class="fa-brands fa-instagram"></i>
+            </a>
+
+            <a href="https://wa.me/{{ sitesetting.whatsapp }}" target="_blank">
+              <i class="fa-brands fa-whatsapp"></i>
+            </a>
+
+            <a href="{{sitesetting.mobile}}">
+              <i class="fa-solid fa-phone"></i>
+            </a>
+          </div>
+
+          <div class="footer-links">
+            <a href="{% url 'index' %}">خانه</a>
+            <a href="{% url 'service_list' %}">خدمات</a>
+            <a href="{% url 'portfolio_list' %}">نمونه کارها</a>
+            <a href="{% url 'index' %}#pricing-section">تعرفه خدمات</a>
+            <a href="{% url 'index' %}#faq-section">سوالات متداول</a>
+          </div>
+
+          <div class="footer-contact">{{sitesetting.mobile}}</div>
+        </div>
+
+        <div class="footer-bottom">
+          تمامی حقوق محفوظ است © 2026 {{sitesetting.site_name}}
+        </div>
+      </div>
+    </footer>
+    <a href="#" class="back-to-top" id="backToTop">
+      <i class="fa fa-angle-up"></i>
+    </a>
+    <!-- end footer -->

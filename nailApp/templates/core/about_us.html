@@ -1,0 +1,69 @@
+{%extends 'base.html'%} 
+{%load static%} 
+{% block title %} Sanaz Nail Art {% endblock%} 
+{% block breadcrumb %} درباره ما {% endblock %} 
+{%block content%}
+
+<section class="about-us" id="about">
+  <div class="container">
+    <div class="section-title text-center">
+      <span>Sanaz Nail Art</span>
+      <h2>درباره ما</h2>
+      <p>زیبایی، ظرافت و کیفیت در هر جزئیات</p>
+    </div>
+
+    <div class="row align-items-center">
+      <!-- متن -->
+      <div class="col-lg-6 order-lg-1 order-2">
+        <div class="about-content">
+          <h3>جایی که هنر، ظرافت و کیفیت به هم می‌رسند.</h3>
+
+          <p>
+            در سالن تخصصی ناخن ساناز، هدف ما فقط ارائه خدمات نیست؛ بلکه خلق
+            تجربه‌ای متفاوت از زیبایی است. با استفاده از متریال باکیفیت، رعایت
+            کامل اصول بهداشتی و جدیدترین تکنیک‌های روز، تلاش می‌کنیم دستان شما
+            همیشه زیبا و خاص بدرخشند.
+          </p>
+
+          <p>
+            هر طراحی با دقت، خلاقیت و توجه به سلیقه شما انجام می‌شود تا نتیجه
+            نهایی، دقیقاً همان چیزی باشد که انتظارش را دارید.
+          </p>
+
+          <div class="about-features">
+            <div class="feature">
+              <i class="fa fa-check"></i>
+              <span>استفاده از متریال درجه یک</span>
+            </div>
+
+            <div class="feature">
+              <i class="fa fa-check"></i>
+              <span>رعایت کامل اصول بهداشتی</span>
+            </div>
+
+            <div class="feature">
+              <i class="fa fa-check"></i>
+              <span>طراحی اختصاصی مطابق سلیقه شما</span>
+            </div>
+
+            <div class="feature">
+              <i class="fa fa-check"></i>
+              <span>اجرای دقیق با جدیدترین متدهای روز</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- عکس -->
+      <div class="col-lg-6 order-lg-2 order-1">
+        <div class="about-image">
+          <img
+            src="{%static 'nailApp/' %}images/about.webp"
+            alt="Sanaz Nail Art"
+          />
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+{%endblock%}

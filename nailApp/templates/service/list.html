@@ -1,0 +1,86 @@
+{%extends 'base.html'%} 
+{%load static%} 
+{% block title %} Sanaz Nail Art {% endblock%} 
+{% block breadcrumb %} خدمات ما {% endblock %} 
+{%block content%}
+
+    <section class="service-showcase">
+      <div class="container">
+        <div class="section-title text-center">
+          <span>{{sitesetting.site_name}}</span>
+          <h2>{{innerhero.title}}</h2>
+          <p>
+            {{innerhero.subtitle}}
+          </p>
+        </div>
+
+        <!-- Service 1 -->
+{%for service in services%}
+        <div class="service-row" {%if forloop.counter|divisibleby:'2' %} reverse{%endif%} 
+        id="{{service.slug}}">
+          <div class="service-image">
+            <img src="{{service.cover_image.url}}" alt="{{service.title}}" />
+          </div>
+
+          <div class="service-info">
+            <span class="service-number">{{forloop.counter|stringformat:'02d' }}</span>
+
+            <h2>{{service.title}}</h2>
+
+            <p>
+              {{service.short_description}}
+            </p>
+
+            <ul>
+          {%for feature in service.featurs.all%}
+              {%if feature.is_active%}
+              <li>
+                <i class="fa fa-check"></i>
+                {{feature.title}}
+              </li>
+              {%endif%}
+              {%empty%}
+              <li>ویژگی ثبت نشده است
+              </li>
+
+{%endfor%}
+            </ul>
+
+            <a href="{% url 'index' %}#pricing-section" class="service-price-link">
+              مشاهده تعرفه
+
+              <i class="fa fa-arrow-left"></i>
+            </a>
+          </div>
+        </div>
+{%endfor%}
+      </div>
+    </section>
+
+    <!-- ==========================
+     CTA
+=========================== -->
+
+    <section class="service-cta">
+      <div class="container">
+        <div class="cta-box">
+          <span>Sanaz Nail Art</span>
+
+          <h2>آماده داشتن ناخن‌هایی زیبا و حرفه‌ای هستید؟</h2>
+
+          <p>
+            کافیست همین امروز نوبت خود را رزرو کنید تا با جدیدترین متدهای روز
+            دنیا، زیبایی دستانتان را چند برابر کنیم.
+          </p>
+
+          <div class="cta-buttons">
+            <a href="https://wa.me/{{ sitesetting.whatsapp }}" class="btn-primary">
+              رزرو نوبت
+            </a>
+
+            <a href="{% url 'contact_us' %}" class="btn-outline"> تماس با ما </a>
+          </div>
+        </div>
+      </div>
+    </section>
+{%endblock%}

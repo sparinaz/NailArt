@@ -1,0 +1,354 @@
+{%extends 'base.html'%} 
+{%load static%} 
+{% block title %} Sanaz Nail Art {% endblock%} 
+{% block breadcrumb %} بلاگ {% endblock %} 
+{%block content%}
+
+<!-- ==========================
+BLOG HERO
+=========================== -->
+
+<section class="blog-hero">
+  <div class="container">
+    <div class="section-title text-center">
+      <span>Sanaz Nail Art Blog</span>
+
+      <h1>{{innerhero.title}}</h1>
+
+      <p>
+        {{innerhero.subtitle}}
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- ==========================
+BLOG CONTENT
+=========================== -->
+
+<section class="blog-page">
+  <div class="container">
+    <div class="blog-layout">
+      <!-- ==========================
+            MAIN
+            =========================== -->
+
+      <main class="blog-main">
+        <!-- Featured -->
+{%if featured_post%}
+        <article class="featured-post">
+          <a href="{% url 'blog_detail' featured_post.slug %}" class="featured-link">
+            <div class="featured-image">
+              <img
+                src="{{featured_post.cover_image.url}}"
+                alt="{{featured_post.title}}"
+              />
+
+              <div class="featured-overlay">
+                <span class="featured-category"> {{featured_post.category}} </span>
+
+                <h2>{{featured_post.title}}</h2>
+              </div>
+            </div>
+
+            <div class="featured-content">
+              <p>
+                {{featured_post.short_description}}
+              </p>
+
+              <div class="featured-meta">
+                <span>
+                  <i class="fa fa-user"></i>
+
+                  {{sitesetting.site_name}}
+                </span>
+
+                <span>
+                  <i class="fa fa-calendar"></i>
+
+                   {{featured_post.published_at}}
+                </span>
+
+                <span>
+                  <i class="fa fa-clock-o"></i>
+
+                  {{featured_post.reading_time}}
+                </span>
+
+                <span>
+                  <i class="fa fa-eye"></i>
+
+                  {{featured_post.views}}
+                </span>
+              </div>
+
+              <span class="blog-btn">
+                مطالعه مقاله
+
+                <i class="fa fa-arrow-left"></i>
+              </span>
+            </div>
+          </a>
+        </article>
+{%endif%}
+        <!-- ==========================
+                Section Title
+                =========================== -->
+
+        <div class="blog-section-title">
+          {% if request.GET.keyword %}
+    <h3>
+        نتایج جستجو برای: {{ request.GET.keyword }}
+    </h3>
+{% else %}
+    <h3>
+        آخرین مقالات
+    </h3>
+{% endif %}
+        </div>
+
+        <!-- ==========================
+                Posts Grid
+                =========================== -->
+
+        <div class="blog-grid">
+          <!-- Card 1 -->
+{%for blog in blogs%}
+          <article class="blog-card">
+            <a href="{% url 'blog_detail' blog.slug %}" class="blog-image">
+              <img
+                src="{{blog.cover_image.url}}"
+                alt="{{blog.title}}"
+              />
+              <div class="blog-hover">
+                <span>
+                  مطالعه مقاله
+                  <i class="fa fa-arrow-left"></i>
+                </span>
+              </div>
+            </a>
+
+            <div class="blog-content">
+              <a href="{% url 'category_posts' blog.category.slug %}" class="blog-category"> {{blog.category.name}} </a>
+
+              <h3>
+                <a href="{% url 'blog_detail' blog.slug %}">
+                  {{blog.title}}
+                </a>
+              </h3>
+
+              <p>
+                {{blog.short_description}}
+              </p>
+              <div class="blog-meta">
+                <span>
+                  <i class="fa fa-calendar"></i>
+
+                  {{blog.published_at}} 
+                </span>
+
+                <span>
+                  <i class="fa fa-clock-o"></i>
+
+                  {{blog.reading_time}}
+                </span>
+              </div>
+              <div class="blog-tags">
+                {%for tag in blog.tags.all%}
+                <a href="{% url 'tag_posts' tag.slug %}">
+                  {{tag.name}}</a>
+{%endfor%}
+              </div>
+            </div>
+          </article>
+          {% empty %}
+
+    <h3>نتیجه‌ای یافت نشد</h3>
+
+{% endfor %}
+
+
+        <!-- Pagination -->
+
+        <nav class="blog-pagination">
+          {%if page_obj.has_previous%}
+            {% if request.GET.keyword %}
+          <a class="prev" 
+          href="?keyword={{ request.GET.keyword }}&page={{ page_obj.previous_page_number }}">
+            <i class="fa-solid fa-angle-right"></i>
+          </a>
+          {% else %}
+          <a class="prev" 
+          href="?page={{ page_obj.previous_page_number }}">
+            <i class="fa-solid fa-angle-right"></i>
+          </a>
+          {%endif%}
+        {%endif%} 
+
+{% for i in paginator.page_range %}
+
+    {% if i == page_obj.number %}
+      
+        <span class="active">{{ i }}</span>
+
+    {% else %}
+    {% if request.GET.keyword %}
+        <a href="?keyword={{ request.GET.keyword }}&page={{ i }}">{{ i }}</a>
+        {% else %}
+
+            <a href="?page={{ i }}">
+                {{ i }}
+            </a>
+
+    {% endif %}
+  {% endif %}  
+
+{% endfor %}
+
+{%if page_obj.has_next%}
+  {% if request.GET.keyword %}
+          <a class="next" 
+          href="?keyword={{ request.GET.keyword }}&page={{ page_obj.next_page_number }}">
+            <i class="fa-solid fa-angle-left"></i>
+          </a>
+          {% else %}
+          <a class="next" 
+          href="?page={{ page_obj.next_page_number }}">
+            <i class="fa-solid fa-angle-left"></i>
+          </a>
+          {%endif%}
+        {%endif%}
+        </nav>
+        <!-- ==========================
+NEWSLETTER
+========================== -->
+
+        <section class="blog-newsletter">
+          <div class="newsletter-box">
+            <span class="newsletter-subtitle"> {{sitesetting.site_name}} </span>
+
+            <h2>هر هفته نکات تخصصی مراقبت از ناخن را دریافت کنید</h2>
+
+            <p>
+              جدیدترین آموزش‌ها، ترندهای طراحی ناخن و نکات مراقبتی را مستقیماً
+              در ایمیل خود دریافت کنید.
+            </p>
+
+            <form class="newsletter-form">
+              <input type="email" placeholder="ایمیل خود را وارد کنید" />
+
+              <button type="submit">
+                عضویت
+
+                <i class="fa fa-paper-plane"></i>
+              </button>
+            </form>
+          </div>
+        </section>
+      </main>
+<!-- ==========================
+SIDEBAR
+========================== -->
+
+          <aside class="blog-sidebar">
+            <!-- Search -->
+
+            <div class="sidebar-widget">
+              <h3 class="widget-title">جستجوی مقالات</h3>
+
+              <form method="get" action="{% url 'blog_list' %}" class="blog-search">
+                <input type="text" name="keyword" 
+                placeholder="دنبال چه مقاله‌ای هستید؟" 
+                value="{{request.GET.keyword}}"/>
+
+                <button type="submit" title="جستجو" aria-label="جستجو">
+                  <i class="fa fa-search"></i>
+                </button>
+              </form>
+             
+            </div>
+
+            <!-- Categories -->
+
+            <div class="sidebar-widget">
+              <h3 class="widget-title">دسته‌بندی‌ها</h3>
+
+              <ul class="category-list">
+                {%for category in categories%}
+                <li>
+                  <a href="{% url 'category_posts' category.slug %}">
+                    {{category.name}}
+
+                    <span>{{ category.blog_count }}</span>
+                  </a>
+                </li>
+              {%endfor%}
+
+              </ul>
+            </div>
+
+            <!-- Popular -->
+
+            <div class="sidebar-widget">
+              <h3 class="widget-title">محبوب‌ترین مقالات</h3>
+{%for post in popular_posts%}
+              <div class="popular-post">
+                <img src="{{post.cover_image.url}}" alt="{{post.title}}" />
+
+                <div>
+                  <a href="{% url 'blog_detail' post.slug %}"> {{post.title}} </a>
+
+                  <span>{{post.published_at}}</span>
+                </div>
+              </div>
+              {%endfor%}
+            </div>
+
+            <!-- Newsletter -->
+
+            <div class="sidebar-widget newsletter-widget">
+              <span> {{sitesetting.site_name}} </span>
+
+              <h3>عضویت در خبرنامه</h3>
+
+              <p>جدیدترین مقالات و آموزش‌های تخصصی ناخن را دریافت کنید.</p>
+
+              <form method="post">
+                {%csrf_token%}
+                <input type="email" name="email" placeholder="ایمیل شما" />
+
+                <input type="submit" value="عضویت">
+              </form>
+            </div>
+          </aside>
+    </div>
+  </div>
+</section>
+
+<!-- ==========================
+BLOG CTA
+========================== -->
+
+<section class="blog-cta">
+  <div class="container">
+    <div class="blog-cta-box">
+      <span> {{sitesetting.site_name}} </span>
+
+      <h2>زیبایی ناخن از یک انتخاب حرفه‌ای شروع می‌شود</h2>
+
+      <p>
+        حالا که با جدیدترین آموزش‌ها و نکات مراقبتی آشنا شدید، وقت آن رسیده
+        زیبایی دستانتان را به یک متخصص بسپارید.
+      </p>
+
+      <div class="blog-cta-buttons">
+        <a href="https://wa.me/{{sitesetting.whatsapp}}" class="btn-primary"> رزرو نوبت </a>
+
+        <a href="{% url 'portfolio_list' %}" class="btn-outline">
+          مشاهده نمونه کارها
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+{%endblock%}

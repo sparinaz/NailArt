@@ -1,0 +1,36 @@
+    <!-- Mobile Header -->
+    <header class="mobile-header">
+      <div class="mobile-container">
+        <div class="mobile-nav">
+          <a href="{% url 'index' %}" class="mobile-logo">
+            <img
+              src="{{ sitesetting.logo.url }}"
+              alt="{{sitesetting.site_name}}"
+            />
+          </a>
+
+          <button class="mobile-toggle">
+            <i class="fa fa-bars"></i>
+          </button>
+        </div>
+
+        <div class="mobile-menu">
+          <a href="{% url 'index' %}">خانه</a>
+
+          <a href="{% url 'service_list' %}">خدمات</a>
+
+          <a href="{% url 'portfolio_list' %}">نمونه کارها</a>
+
+          <a href="{% url 'blog_list' %}">بلاگ</a>
+
+          <a href="{% url 'about_us' %}">درباره ما</a>
+
+          <a href="{% url 'contact_us' %}">تماس با ما</a>
+
+          <a href="https://wa.me/{{ sitesetting.whatsapp }}" class="mobile-btn">
+            رزرو نوبت
+          </a>
+        </div>
+      </div>
+    </header>
+    <!-- end Mobile Header -->

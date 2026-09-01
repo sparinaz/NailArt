@@ -1,0 +1,396 @@
+{%extends 'base.html'%} 
+{%load static%} 
+{% block title %} Sanaz Nail Art {% endblock%} 
+{% block breadcrumb %} مقاله {% endblock %} 
+{%block content%}
+
+    <section class="blog-single-hero">
+      <div class="container">
+        <div class="blog-single-breadcrumb">
+          <a href="{% url 'index' %}"> خانه </a>
+
+          <span>/</span>
+
+          <a href="{% url 'blog_list' %}"> وبلاگ </a>
+
+          <span>/</span>
+
+          <span> {{article.title}} </span>
+        </div>
+
+        <span class="article-category"> {{article.category}} </span>
+
+        <h1>{{article.title}}</h1>
+          <p class="article-subtitle">
+            {{ article.short_description }}
+          </p>
+
+        <div class="article-meta">
+          <span>
+            <i class="fa fa-calendar"></i>
+
+            {{article.published_at}}
+          </span>
+
+          <span>
+            <i class="fa fa-clock-o"></i>
+
+             {{article.reading_time}}
+          </span>
+
+          <span>
+            <i class="fa fa-user"></i>
+
+            {{article.author}}
+          </span>
+        </div>
+      </div>
+    </section>
+
+    <!-- =====================================
+ARTICLE
+====================================== -->
+
+    <section class="single-blog">
+      <div class="container">
+        <div class="single-layout">
+          <main class="article-content">
+            <div class="article-cover">
+              <img
+                src="{{article.cover_image.url}}"
+                alt="{{article.title}}"
+              />
+            </div>
+
+            <!-- Table of contents -->
+
+            <div class="table-of-content">
+              <h3>فهرست مطالب</h3>
+
+              <ul>
+                <li>
+                  <a href="#sec1"> چرا مراقبت بعد از کاشت مهم است؟ </a>
+                </li>
+
+                <li>
+                  <a href="#sec2"> ۵ نکته مهم روزهای اول </a>
+                </li>
+
+                <li>
+                  <a href="#sec3"> اشتباهات رایج </a>
+                </li>
+
+                <li>
+                  <a href="#sec4"> زمان مناسب ترمیم </a>
+                </li>
+              </ul>
+            </div>
+
+            <!-- Article -->
+
+            <div class="article-body">
+              <h2 id="sec1">{{article.short_description}}</h2>
+
+<!-- {{ article.content|safe }} -->
+              <p>
+                بعد از انجام کاشت، ناخن در بهترین وضعیت خود قرار دارد اما اگر
+                مراقبت‌های لازم انجام نشود، احتمال هواگرفتگی، شکستگی، جدا شدن
+                مواد و حتی آسیب به ناخن طبیعی وجود دارد.
+              </p>
+
+              <p>
+                رعایت چند نکته ساده باعث می‌شود دوام کاشت تا چند هفته بیشتر شود
+                و ظاهر ناخن‌ها همیشه زیبا باقی بماند.
+              </p>
+
+              <blockquote>
+                زیبایی ناخن فقط به طراحی آن نیست؛ نگهداری صحیح مهم‌ترین راز
+                ماندگاری است.
+              </blockquote>
+
+              <img src="{{article.cover_image.url}}" alt="{{ article.category }} - {{ article.title }}" />
+
+              <h2 id="sec2">{{article.short_description}}</h2>
+
+              <ul>
+                <li>تا ۲۴ ساعت از ضربه شدید جلوگیری کنید.</li>
+
+                <li>از تماس طولانی با آب داغ خودداری کنید.</li>
+
+                <li>از ناخن به عنوان ابزار استفاده نکنید.</li>
+
+                <li>روغن کوتیکول را روزانه استفاده کنید.</li>
+
+                <li>از دستکش هنگام شستشو استفاده کنید.</li>
+              </ul>
+
+              <h2 id="sec3">{{article.short_description}}</h2>
+
+              <p>
+                کندن مواد، استفاده از استون غلیظ، تماس زیاد با مواد شوینده و
+                مراجعه دیرهنگام برای ترمیم، از مهم‌ترین دلایل آسیب به کاشت ناخن
+                هستند.
+              </p>
+
+              <img src="{{article.cover_image.url}}" alt="{{ article.category }} - {{ article.title }}" />
+
+              <h2 id="sec4">{{article.short_description}}</h2>
+
+              <p>
+                بسته به رشد ناخن، معمولاً هر ۳ تا ۴ هفته بهترین زمان مراجعه برای
+                ترمیم است.
+              </p>
+            </div>
+            <!-- =====================================
+                AUTHOR
+                ====================================== -->
+
+            <div class="author-author">
+              <div class="author-avatar">
+                <img src="{{article.cover_image.url}}" alt="{{sitesetting.site_name}}" />
+              </div>
+
+              <div class="author-info">
+                <span> {{article.author}} </span>
+
+                <h3>{{sitesetting.site_name}}</h3>
+
+                <p>
+                  متخصص طراحی و کاشت ناخن با تمرکز بر متدهای مدرن، آموزش مراقبت
+                  صحیح از ناخن و معرفی جدیدترین ترندهای صنعت زیبایی.
+                </p>
+              </div>
+            </div>
+
+            <!-- =====================================
+                SHARE
+                ====================================== -->
+
+            <div class="article-share">
+              <span>اشتراک گذاری</span>
+
+              <div class="share-icons">
+                <a href="{{sitesetting.instagram}}">
+                  <i class="fa-brands fa-instagram"></i>
+                </a>
+
+                <a href="https://wa.me/{{sitesetting.whatsapp}}">
+                  <i class="fa-brands fa-whatsapp"></i>
+                </a>
+
+                <a href="{{sitesetting.telegram}}">
+                  <i class="fa-brands fa-telegram"></i>
+                </a>
+
+                <a href="{{sitesetting.linkedin}}">
+                  <i class="fa-solid fa-link"></i>
+                </a>
+              </div>
+            </div>
+
+            <!-- =====================================
+                RELATED POSTS
+                ====================================== -->
+
+            <section class="related-posts">
+              <h2>مقالات مرتبط</h2>
+
+              <div class="related-list">
+                {%for post in related_posts%}
+                <article class="related-item">
+                  <a href="{% url 'blog_detail' post.slug %}" class="related-image">
+                    <img src="{{post.cover_image.url}}" alt="{{post.title}}" />
+                  </a>
+
+                  <div class="related-content">
+                    <span class="related-category">{{post.category}}</span>
+
+                    <h3>
+                      <a href="{% url 'blog_detail' post.slug %}">
+                        {{post.title}}
+                      </a>
+                    </h3>
+
+                    <p>
+                      {{post.short_description}}
+                    </p>
+
+                    <div class="related-meta">
+                      <span>
+                        <i class="fa-solid fa-calendar-days"></i>
+                        {{post.published_at}} 
+                      </span>
+
+                      <span>
+                        <i class="fa-regular fa-clock"></i>
+                        {{post.reading_time}}
+                      </span>
+                    </div>
+                  </div>
+                </article>
+                {%endfor%}
+              </div>
+            </section>
+
+            <!-- =====================================
+                COMMENTS
+                ====================================== -->
+
+            <section class="comment-section">
+              <h2>ارسال دیدگاه</h2>
+
+              <form method="post" class="comment-form">
+                {%csrf_token%}
+                <div class="comment-row">
+                  <input type="text" name="name" placeholder="نام" 
+                  value="{{ comment_form.name.value|default:'' }}"/>
+                  {% if comment_form.name.errors %}
+                      <div class="form-error">
+                          {{ comment_form.name.errors }}
+                      </div>
+                  {% endif %}
+
+                  <input type="tel" name="mobile" placeholder="شماره موبایل (اختیاری)" 
+                  value="{{comment_form.mobile.value|default:''}}"/>
+                  {% if comment_form.mobile.errors %}
+                      <div class="form-error">
+                          {{ comment_form.mobile.errors }}
+                      </div>
+                  {% endif %}
+
+                <textarea
+                  name="text"
+                  rows="7"
+                  placeholder="دیدگاه خود را بنویسید...">
+
+                {{comment_form.text.value|default:'' }}  
+                
+              </textarea>
+              {% if comment_form.text.errors %}
+                      <div class="form-error">
+                          {{ comment_form.text.errors }}
+                      </div>
+                  {% endif %}
+
+                <button type="submit">ارسال دیدگاه</button>
+                </div>
+              </form>
+
+              <div class="comments-list">
+
+    {% for comment in approved_comments %}
+
+    <div class="comment-card">
+
+        <div class="comment-avatar">
+            {{ comment.avatar_letter }}
+        </div>
+
+        <div class="comment-content">
+            <h5>{{ comment.name }}</h5>
+
+            <span>
+                {{ comment.created_at }}
+            </span>
+
+            <p>
+                {{ comment.text }}
+            </p>
+        </div>
+
+    </div>
+
+    {% empty %}
+
+    <p class="no-comments">
+        هنوز نظری ثبت نشده است، اولین نفری باشید که نظر می‌دهد.
+    </p>
+
+    {% endfor %}
+
+</div>
+            </section>
+          </main>
+
+          <!-- ==========================
+            SIDEBAR
+            =========================== -->
+          <!-- ==========================
+SIDEBAR
+=========================== -->
+
+          <aside class="blog-sidebar">
+            <!-- Search -->
+
+            <div class="sidebar-widget">
+              <h3 class="widget-title">جستجوی مقالات</h3>
+
+              <form method="get" action="{% url 'blog_list' %}" class="blog-search">
+                <input type="text" name="keyword" 
+                placeholder="دنبال چه مقاله‌ای هستید؟" 
+                value="{{request.GET.keyword}}"/>
+
+                <button type="submit" title="جستجو" aria-label="جستجو">
+                  <i class="fa fa-search"></i>
+                </button>
+              </form>
+             
+            </div>
+
+            <!-- Categories -->
+
+            <div class="sidebar-widget">
+              <h3 class="widget-title">دسته‌بندی‌ها</h3>
+
+              <ul class="category-list">
+                {%for category in categories%}
+                <li>
+                  <a href="{% url 'category_posts' category.slug %}">
+                    {{category.title}}
+
+                    <span>{{category.blog_count}}</span>
+                  </a>
+                </li>
+              {%endfor%}
+
+              </ul>
+            </div>
+
+            <!-- Popular -->
+
+            <div class="sidebar-widget">
+              <h3 class="widget-title">محبوب‌ترین مقالات</h3>
+{%for post in popular_posts%}
+              <div class="popular-post">
+                <img src="{{post.cover_image.url}}" alt="{{post.title}}" />
+
+                <div>
+                  <a href="{% url 'blog_detail' post.slug %}"> {{post.title}} </a>
+
+                  <span>{{post.published_at}}</span>
+                </div>
+              </div>
+              {%endfor%}
+            </div>
+
+            <!-- Newsletter -->
+
+            <div class="sidebar-widget newsletter-widget">
+              <span> {{sitesetting.site_name}} </span>
+
+              <h3>عضویت در خبرنامه</h3>
+
+              <p>جدیدترین مقالات و آموزش‌های تخصصی ناخن را دریافت کنید.</p>
+
+              <form method="post">
+                {%csrf_token%}
+                <input type="email" name="email" placeholder="ایمیل شما" />
+
+                <input type="submit" value="عضویت">
+              </form>
+            </div>
+          </aside>
+        </div>
+      </div>
+    </section>
+{%endblock%}
