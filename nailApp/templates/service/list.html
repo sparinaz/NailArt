@@ -16,7 +16,7 @@
 
         <!-- Service 1 -->
 {%for service in services%}
-        <div class="service-row" {%if forloop.counter|divisibleby:'2' %} reverse{%endif%} 
+        <div class="service-row {% if forloop.counter|divisibleby:'2' %}reverse{% endif %}"
         id="{{service.slug}}">
           <div class="service-image">
             <img src="{{service.cover_image.url}}" alt="{{service.title}}" />
@@ -32,7 +32,7 @@
             </p>
 
             <ul>
-          {%for feature in service.featurs.all%}
+          {%for feature in service.features.all%}
               {%if feature.is_active%}
               <li>
                 <i class="fa fa-check"></i>

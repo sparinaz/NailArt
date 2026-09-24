@@ -15,14 +15,16 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path
+from django.urls import path ,include
 from django.conf.urls.static import static
 from django.conf import settings
 from django.views.generic import TemplateView
+from django_ckeditor_5 import urls as ckeditor5_urls
 from nailApp.views import *
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path("ckeditor5/", include(ckeditor5_urls)),
     path('', HomeView.as_view() , name='index'),
     path(
         "services/",

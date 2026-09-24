@@ -180,13 +180,18 @@
           <br />
 
           <div class="hero-buttons">
-            <a href="{{hero.button_link}}" class="hero-btn primary-btn">
-              {{hero.button_text}}
+
+            <a href="{{ hero.primary_button_link }}" class="hero-btn primary-btn">
+                {{ hero.primary_button_text }}
             </a>
 
-            <a href="#portfolio" class="hero-btn secondary-btn">
-              {{hero.button_text}}
+            <a href="{{ hero.secondary_button_link }}" class="hero-btn secondary-btn">
+                {{ hero.secondary_button_text }}
             </a>
+
+        </div>
+
+
           </div>
         </div>
       </div>
@@ -195,45 +200,51 @@
     <!-- end banner -->
     <!-- what we do  -->
     <div class="we_do slin" id="we_do_slin">
-      <div class="container">
-        <div class="row">
-          <div class="col-md-12">
-            <div class="section-title text-center">
-              <h2>
-                <a href="{% url 'service_list' %}" class="section-title-link">
-                  خدمات ما
-                </a>
-              </h2>
-              <p>زیبایی در جزئیات، کیفیت در اجرا</p>
-            </div>
-          </div>
-        </div>
-        <div class="row">
-          <div>
-              {%for service in services%}
-              <div class="col-md-3 col-sm-6">
-                <a
-                  href="{% url 'service_list' %}#{{service.slug}}"
-                  class="service-link"
-                >
-                  <div class="we_box">
-                    <i
-                      ><img
-                        src="{{service.cover_image.url}}"
-                        alt={{service.title}}
-                    /></i>
-                    <h3>{{service.title}}</h3>
-                    <p>
-                      {{service.short_description}}
-                    </p>
-                  </div>
-                </a>
-              </div>
-{%endfor%}
-          </div>
+  <div class="container">
+
+    <div class="row">
+      <div class="col-md-12">
+        <div class="section-title text-center">
+          <h2>
+            <a href="{% url 'service_list' %}" class="section-title-link">
+              خدمات ما
+            </a>
+          </h2>
+          <p>زیبایی در جزئیات، کیفیت در اجرا</p>
         </div>
       </div>
     </div>
+
+    <div class="row">
+
+      {% for service in services %}
+      <div class="col-md-3 col-sm-6">
+        <a
+          href="{% url 'service_list' %}#{{ service.slug }}"
+          class="service-link"
+        >
+          <div class="we_box">
+            <i>
+              <img
+                src="{% static service.icon %}"
+                alt="{{ service.title }}"
+              />
+            </i>
+
+            <h3>{{ service.title }}</h3>
+
+            <p>
+              {{ service.short_description }}
+            </p>
+          </div>
+        </a>
+      </div>
+      {% endfor %}
+
+    </div>
+
+  </div>
+</div>
     <!-- end what we do  -->
     <!-- why us  -->
     <section class="why-us" id="why-us">
@@ -303,7 +314,7 @@
 
       <div class="gallery">
         {%for portfolio in portfolios%}
-        <div class="card">
+        <div class="card ">
           <img
             src="{{portfolio.cover_image.url}}"
             alt="{{portfolio.title}}"
@@ -322,7 +333,7 @@ BLOG
         <div class="section-title text-center">
           <span>Beauty Journal</span>
           <h2>
-            <a href="{% url 'portfolio_list' %}" class="section-title-link">
+            <a href="{% url 'blog_list' %}" class="section-title-link">
               آخرین مقالات
             </a>
           </h2>
@@ -347,20 +358,22 @@ BLOG
               <div class="blog-meta">
                 <span>
                   <i class="fa fa-calendar"></i>
-                  {{blog.published_at}}
+                  {{ blog.published_at|date:"Y/m/d" }}
                 </span>
 
                 <span>
-                  <i class="fa fa-clock-o"></i>
-                  {{blog.reading_time}}
-                </span>
+        <i class="fa fa-clock-o"></i>
+        {{ blog.reading_time }} دقیقه مطالعه
+    </span>
+
               </div>
 
-              <h3>
-                <a href="{% url 'blog_detail' blog.slug %}">
-                  {{blog.short_description}}
-                </a>
-              </h3>
+                <h3>
+    <a href="{% url 'blog_detail' blog.slug %}">
+        {{blog.title}}
+    </a>
+</h3>
+
 
               <p>
                 {{blog.short_description}}
@@ -373,82 +386,65 @@ BLOG
               </a>
               <div class="blog-tags">
               {%for tag in blog.tags.all%}
-                <a href="#">{{tag.name}}</a>
+                <a href="{% url 'tag_posts' tag.slug %}">{{tag.name}}</a>
               {%endfor%}
               </div>
             </div>
           </article>
 
 {%endfor%}
-
+        </div>
         <div class="blog-more">
           <a href="{% url 'blog_list' %}" class="btn-primary"> مشاهده همه مقالات </a>
         </div>
       </div>
     </section>
     <!-- end blog -->
-    <!-- pricing -->
 
-    <section class="pricing-section" id="pricing-section">
-      <div class="container">
-        <div class="section-title text-center">
-          <h2>تعرفه خدمات</h2>
-          <p>قیمت‌های به‌روز خدمات ناخن</p>
-        </div>
+<!-- pricing -->
+<section class="pricing-section" id="pricing-section">
+  <div class="container">
 
-        <div class="row">
-          <div class="col-lg-3 col-md-6 mb-4">
-            <div class="price-card">
-              <h3>ژلیش ناخن</h3>
-              <div class="price">از ۳۵۰ هزار</div>
-              <ul>
-                <li>ماندگاری بالا</li>
-                <li>رنگ‌بندی متنوع</li>
-                <li>مواد باکیفیت</li>
-              </ul>
-            </div>
-          </div>
+    <div class="section-title text-center">
+      <h2>تعرفه خدمات</h2>
+      <p>قیمت‌های به‌روز خدمات ناخن</p>
+    </div>
 
-          <div class="col-lg-3 col-md-6 mb-4">
-            <div class="price-card featured">
+    <div class="row">
+
+      {% for service in pricing_services %}
+
+        <div class="col-lg-3 col-md-6 mb-4">
+          <div class="price-card {% if service.is_featured %}featured{% endif %}">
+
+            {% if service.is_featured %}
               <span class="badge-price">پرطرفدار</span>
-              <h3>کاشت ژل</h3>
-              <div class="price">از ۶۵۰ هزار</div>
-              <ul>
-                <li>فرم‌دهی حرفه‌ای</li>
-                <li>استحکام بالا</li>
-                <li>طراحی اختصاصی</li>
-              </ul>
-            </div>
-          </div>
+            {% endif %}
 
-          <div class="col-lg-3 col-md-6 mb-4">
-            <div class="price-card">
-              <h3>ترمیم ناخن</h3>
-              <div class="price">از ۴۵۰ هزار</div>
-              <ul>
-                <li>ترمیم اصولی</li>
-                <li>رفع شکستگی</li>
-                <li>ماندگاری بالا</li>
-              </ul>
-            </div>
-          </div>
+            <h3>{{ service.title }}</h3>
 
-          <div class="col-lg-3 col-md-6 mb-4">
-            <div class="price-card">
-              <h3>طراحی ویژه</h3>
-              <div class="price">از ۲۰۰ هزار</div>
-              <ul>
-                <li>دیزاین ترند</li>
-                <li>نگین و فویل</li>
-                <li>طرح اختصاصی</li>
-              </ul>
-            </div>
+            <div class="price">
+    از {{ service.base_price }}
+    <span class="price-unit">تومان</span>
+</div>
+
+            <ul>
+              {% for feature in service.features.all %}
+                <li>{{ feature.title }}</li>
+              {% endfor %}
+            </ul>
+
           </div>
         </div>
-      </div>
-    </section>
-    <!-- end pricing -->
+
+      {% endfor %}
+
+    </div>
+  </div>
+</section>
+<!-- end pricing -->
+
+
     <!-- Customer satisfaction -->
     <section class="testimonials" id="testimonials">
       <div class="container">
@@ -458,21 +454,57 @@ BLOG
         </div>
 
         <div class="row">
-          {%for testimonial in testimonials%}
-          <div class="col-lg-4 col-md-6 mb-4">
-            <div class="testimonial-card">
-              <div class="stars">{{testimonial.rating}}</div>
+  {% for testimonial in testimonials %}
+    <div class="col-lg-4 col-md-6 mb-4">
+      <div class="testimonial-card">
 
-              <p>
-                {{testimonial.comment}}
-              </p>
+        <div class="stars">
+    {% for i in "12345" %}
+        {% if forloop.counter <= testimonial.rating %}
+            <span class="star filled">★</span>
+        {% else %}
+            <span class="star empty">★</span>
+        {% endif %}
+    {% endfor %}
+</div>
 
-              <div class="client">
-                <h4>{{testimonial.full_name}}</h4>
-              </div>
-            </div>
-          </div>
-{%endfor%}
+        <p>
+          {{ testimonial.comment }}
+        </p>
+
+        <div class="client">
+
+    <div class="client-avatar">
+        {% if testimonial.image %}
+            <img src="{{ testimonial.image.url }}" alt="{{ testimonial.full_name }}">
+        {% else %}
+            <div class="client-avatar">
+    {% if testimonial.image %}
+        <img src="{{ testimonial.image.url }}" alt="{{ testimonial.full_name }}">
+    {% else %}
+        <svg viewBox="0 0 24 24" aria-hidden="true">
+            <circle cx="12" cy="8" r="4"></circle>
+            <path d="M4 21c0-4.2 3.6-7 8-7s8 2.8 8 7"></path>
+        </svg>
+    {% endif %}
+</div>
+        {% endif %}
+    </div>
+
+    <div>
+        <h4>{{ testimonial.full_name }}</h4>
+
+        {% if testimonial.job_title %}
+            <span>{{ testimonial.job_title }}</span>
+        {% endif %}
+    </div>
+
+</div>
+
+      </div>
+    </div>
+  {% endfor %}
+</div>
         </div>
       </div>
     </section>

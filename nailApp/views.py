@@ -17,25 +17,61 @@ from .models import(Hero,
 
 class HomeView(TemplateView):
     template_name = 'core/index.html'
-    def get_context_data(self, **kwargs):
-      context = super().get_context_data(**kwargs)
-      context['hero'] = Hero.objects.filter(is_active=True).first()
-      context['services'] = Service.objects.filter(
-         is_active=True , show_on_home=True).order_by('order')[:8] 
-      context['portfolios'] = Portfolio.objects.filter(
-         is_active=True , show_on_home=True).order_by('order')[:5] 
-      context['blogs'] = (
-         Blog.objects
-         .published()
-         .filter(show_on_home=True)
-         .order_by('-published_at')[:3]
-      ) 
-      context['testimonials'] = Testimonial.objects.filter(
-         is_active=True , show_on_home=True).order_by('-updated_at')[:3]
-      context['faqs'] = FAQ.objects.filter(
-         is_active=True , show_on_home=True).order_by('-updated_at')[:4]
 
-      return context
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+
+        context['hero'] = Hero.objects.filter(
+            is_active=True
+        ).first()
+
+        services = Service.objects.filter(
+            is_active=True,
+            show_on_home=True
+        ).order_by('order')[:8]
+
+        pricing_services = Service.objects.filter(
+            is_active=True ,
+            show_on_pricing=True
+        ).order_by('order')[:4]
+
+        icon_map = {
+            'nail-extension': 'images/icon/nail.png',
+            'gel-polish': 'images/icon/gel.png',
+            'nail-repair': 'images/icon/repair.png',
+            'nail-art': 'images/icon/design.png',
+        }
+
+        for service in services:
+            service.icon = icon_map.get(service.slug)
+
+        context['services'] = services
+
+        context['pricing_services'] = pricing_services
+
+        context['portfolios'] = Portfolio.objects.filter(
+            is_active=True,
+            show_on_home=True
+        ).order_by('order')[:5]
+
+        context['blogs'] = (
+            Blog.objects
+            .published()
+            .filter(show_on_home=True)
+            .order_by('-published_at')[:3]
+        )
+
+        context['testimonials'] = Testimonial.objects.filter(
+            is_active=True,
+            show_on_home=True
+        ).order_by('order')[:3]
+
+        context['faqs'] = FAQ.objects.filter(
+            is_active=True,
+            show_on_home=True
+        ).order_by('order')[:4]
+
+        return context
 
 class ServiceListView(TemplateView):
    template_name = 'service/list.html'

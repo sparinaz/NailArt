@@ -1,5 +1,6 @@
 from django.db import models
 from django.core.validators import MinValueValidator, MaxValueValidator
+from django_ckeditor_5.fields import CKEditor5Field
 
 
 # ====Hero model=====
@@ -9,8 +10,27 @@ class Hero(models.Model):
     subtitle = models.CharField(max_length=200, blank=True,verbose_name="زیر عنوان")
     description = models.TextField(verbose_name="توضیحات")
 
-    button_text = models.CharField(max_length=50,verbose_name="متن دکمه")
-    button_link = models.CharField(max_length=200,verbose_name="لینک دکمه",blank=True)
+    primary_button_text = models.CharField(
+    max_length=50,
+    verbose_name="متن دکمه اصلی"
+    )
+
+    primary_button_link = models.CharField(
+        max_length=200,
+        verbose_name="لینک دکمه اصلی",
+        blank=True
+    )
+
+    secondary_button_text = models.CharField(
+        max_length=50,
+        verbose_name="متن دکمه دوم"
+    )
+
+    secondary_button_link = models.CharField(
+        max_length=200,
+        verbose_name="لینک دکمه دوم",
+        blank=True
+    )
 
     image = models.ImageField(upload_to="hero/",verbose_name="تصویر")
 
@@ -164,6 +184,20 @@ class Service(models.Model):
     cover_image = models.ImageField(
         upload_to="services/covers/",
         verbose_name="عکس"
+    )
+
+    base_price = models.PositiveIntegerField(
+    verbose_name="قیمت پایه"
+    )
+
+    show_on_pricing = models.BooleanField(
+    default=False,
+    verbose_name="نمایش در تعرفه‌ها"
+    )
+
+    is_featured = models.BooleanField(
+    default=False,
+    verbose_name="پرطرفدار"
     )
 
     order = models.PositiveIntegerField(
@@ -532,7 +566,7 @@ class Blog(models.Model):
         verbose_name="خلاصه مقاله"
     )
 
-    content = models.TextField(
+    content = CKEditor5Field(
         verbose_name="متن مقاله"
     )
 

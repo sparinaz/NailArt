@@ -12,7 +12,8 @@ class HeroAdmin(admin.ModelAdmin):
     list_display = (
         "thumbnail",
         "title",
-        "button_text",
+        "primary_button_text",
+        "secondary_button_text",
         "is_active",
         "updated_at",
     )
@@ -42,12 +43,16 @@ class HeroAdmin(admin.ModelAdmin):
             )
         }),
 
-        ("دکمه", {
+
+        ("دکمه‌ها", {
             "fields": (
-                "button_text",
-                "button_link",
+                "primary_button_text",
+                "primary_button_link",
+                "secondary_button_text",
+                "secondary_button_link",
             )
         }),
+
 
         ("تصویر", {
             "fields": (
@@ -254,6 +259,7 @@ class ServiceAdmin(admin.ModelAdmin):
                 "slug",
                 "short_description",
                 "description",
+                "base_price",
             )
         }),
 
@@ -268,6 +274,8 @@ class ServiceAdmin(admin.ModelAdmin):
             "fields": (
                 "order",
                 "show_on_home",
+                "show_on_pricing",
+                "is_featured",
                 "is_active",
             )
         }),
