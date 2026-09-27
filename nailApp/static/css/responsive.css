@@ -185,7 +185,7 @@
         float: right;
     }
     .navigation.navbar-dark .navbar-toggler-icon {
-        background: url(../images/menu_icon.png);
+
         background-repeat: no-repeat;
     }
     .d_none {
@@ -295,7 +295,7 @@
         color: #fa8c17;
     }
     .navigation.navbar-dark .navbar-toggler-icon {
-        background: url(../images/menu_icon.png);
+
         background-repeat: no-repeat;
     }
     .d_none {
