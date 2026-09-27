@@ -764,6 +764,21 @@ body {
     transform: scale(1.12);
   }
 }
+@media (max-width: 991px) {
+  .hero-bg {
+    animation: heroZoomMobile 15s ease-in-out infinite alternate;
+  }
+}
+
+@keyframes heroZoomMobile {
+  from {
+    transform: scale(1);
+  }
+
+  to {
+    transform: scale(1.03);
+  }
+}
 .hero-content {
   animation: fadeUp 1.2s ease;
 }
