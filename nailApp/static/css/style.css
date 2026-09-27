@@ -812,7 +812,17 @@ body {
 
   transition: all 0.35s ease;
 }
-
+.hero-buttons {
+  display: flex;
+  gap: 15px;
+  margin-top: 25px;
+}
+@media (max-width: 991px) {
+  .hero-buttons {
+    flex-direction: column;
+    gap: 15px;
+  }
+}
 /* دکمه اصلی */
 
 .primary-btn {
