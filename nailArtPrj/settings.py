@@ -30,6 +30,10 @@ DATABASE_URL = os.environ.get("DATABASE_URL")
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = os.environ.get("DEBUG", "False").lower() == "true"
+USE_CLOUDINARY = os.environ.get(
+    "USE_CLOUDINARY",
+    "False"
+).lower() == "true"
 
 ALLOWED_HOSTS = [
     host.strip()
@@ -56,6 +60,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'nailApp' ,
     'django_ckeditor_5',
+    "cloudinary",
 ]
 
 MIDDLEWARE = [
@@ -149,7 +154,18 @@ MEDIA_URL = 'media/'
 MEDIA_ROOT = BASE_DIR/'media/'
 STATIC_URL = 'static/'
 STATIC_ROOT = BASE_DIR / 'staticfiles'
-STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
+STORAGES = {
+    "default": {
+        "BACKEND": (
+            "nailApp.storage.CloudinaryMediaStorage"
+            if USE_CLOUDINARY
+            else "django.core.files.storage.FileSystemStorage"
+        ),
+    },
+    "staticfiles": {
+        "BACKEND": "whitenoise.storage.CompressedManifestStaticFilesStorage",
+    },
+}
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field
