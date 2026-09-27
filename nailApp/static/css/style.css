@@ -821,6 +821,24 @@ body {
   .hero-buttons {
     flex-direction: column;
     gap: 15px;
+    align-items: flex-start;
+  }
+
+  .hero-btn {
+    min-width: 180px;
+    width: auto;
+  }
+
+  .hero-content h1 {
+    font-size: 32px;
+  }
+
+  .hero-subtitle {
+    font-size: 17px;
+  }
+
+  .hero-content p {
+    font-size: 15px;
   }
 }
 /* دکمه اصلی */
